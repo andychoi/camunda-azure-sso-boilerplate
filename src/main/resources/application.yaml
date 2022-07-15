@@ -1,24 +1,60 @@
----
+
+camunda.bpm:
+  admin-user:
+    id: demo
+    password: demo
+    firstName: Demo
+    lastName: Demo
+  filter:
+    create: All Tasks
+  authorization:
+    enabled: true
+
+logging:
+  level:
+    org.springframework: DEBUG
+    org.camunda: INFO
+    com.camunda.example.oauth2: DEBUG
+
+server:
+  #  ssl:
+  #    key-store-type: PKCS12
+  #    key-store: classpath:keystore/keystore.p12
+  #    key-store-password: password
+  #    key-alias: testCert
+  #  servlet:
+  #    session:
+  #      cookie:
+  #        secure: true
+  port: 8080
+  forward-headers-strategy: native
+  
 azure:
   activedirectory:
-    tenant-id: <provide-value-here>
-    user-group:
-      allowed-groups: User
-camunda:
-  bpm:
-    database:
-      type: postgres
+    tenant-id: 85598c5e-6e5c-4513-bcb3-b6fc7d52016b
+    active-directory-groups: camunda-admin
+
 spring:
+  h2:
+    console:
+      #      enabled: false
+      enabled: true
   datasource:
-    password: 786
-    url: "jdbc:postgresql://localhost:5432/camunda"
-    username: postgres
+    #    url: jdbc:postgresql://your-db-domain.postgres.database.azure.com:5432/postgres?ssl=true&sslmode=require
+    #    username: camunda@your-db-domain
+    #    password: yourdbpass
+    #    driver-class-name: org.postgresql.Driver
+    url: jdbc:h2:./camunda-db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: sa
   security:
     oauth2:
       client:
         registration:
           azure:
-            client-id: <provide-value-here>
-            client-secret: <provide-value-here>
+            client-id: 174542ee-208e-4cf1-b5f5-6249aa67bddc
+            client-secret: E6P8Q~Si7drYZkdZYr9k_-aK3v~Ia3Kmympwnb0P
+            redirect-uri: http://localhost:8080/login/oauth2/code/azure
+
 domainNameForCreatingNewUsers: "@finexio.com"
 useAzureRolesAsGroups: false

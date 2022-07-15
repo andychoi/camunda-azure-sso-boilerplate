@@ -11,5 +11,10 @@ Please provide following environment variables in `application.yaml` file:
 - useAzureRolesAsGroups	// Set it to true if you want to use Azure roles for Camunda Authentication Groups.
 ```
 
+mvn clean install
+
+mvn spring-boot:run
+
+
 ## Licence
 MIT
